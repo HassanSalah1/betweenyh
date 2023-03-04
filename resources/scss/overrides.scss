@@ -1,0 +1,18 @@
+@import './base/bootstrap-extended/include'; // Bootstrap includes
+@import './base/components/include'; // Components includes
+
+// --- file input button for dark layout ----- //
+.dark-layout {
+  .form-control {
+    &[type='file'] {
+      &::file-selector-button {
+        background-color: $theme-dark-input-bg;
+      }
+    }
+  }
+}
+
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+  border-color: $red !important;
+}

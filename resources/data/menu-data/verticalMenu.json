@@ -1,0 +1,66 @@
+{
+    "menu": [
+        {
+            "name": "Dashboard",
+            "icon": "home",
+            "url": "admin/dashboard",
+            "slug": [
+                "dashboard"
+            ],
+            "can": "access_dashboard"
+        },
+        {
+            "name": "Manage Users",
+            "icon": "users",
+            "url": "",
+            "slug": [
+                ""
+            ],
+            "can": "access_users",
+            "submenu": [
+                {
+                    "name": "Permissions",
+                    "icon": "circle",
+                    "url": "admin/permissions",
+                    "slug": [
+                        "permissions.index",
+                        "permissions.create",
+                        "permissions.edit"
+                    ],
+                    "can": "access_permissions"
+                },
+                {
+                    "name": "Roles",
+                    "icon": "circle",
+                    "url": "admin/roles",
+                    "slug": [
+                        "roles.index",
+                        "roles.create",
+                        "roles.edit"
+                    ],
+                    "can": "access_roles"
+                },
+                {
+                    "name": "Users",
+                    "icon": "circle",
+                    "url": "admin/users",
+                    "slug": [
+                        "users.index",
+                        "users.edit",
+                        "users.permissions.edit"
+                    ],
+                    "can": "access_users"
+                },
+                {
+                    "name": "Create User",
+                    "icon": "circle",
+                    "url": "admin/users/create",
+                    "slug": [
+                        "users.create"
+                    ],
+                    "can": "create_users"
+                }
+            ]
+        }
+    ]
+}
