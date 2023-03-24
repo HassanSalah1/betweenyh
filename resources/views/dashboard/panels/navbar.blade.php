@@ -30,7 +30,7 @@
                 </defs>
               </svg>
             </span>
-            <h2 class="brand-text mb-0">{{ __('Khutwah') }}</h2>
+            <h2 class="brand-text mb-0">{{ env('APP_NAME') }}</h2>
           </a>
         </li>
       </ul>
@@ -70,43 +70,43 @@
     </ul> --}}
   </div>
   <ul class="nav navbar-nav align-items-center ms-auto">
-    <li class="nav-item dropdown dropdown-language">
-      {{-- <a class="nav-link dropdown-toggle" id="dropdown-flag" href="#" data-bs-toggle="dropdown" aria-haspopup="true">
-        <i class="flag-icon flag-icon-us"></i>
-        <span class="selected-language">English</span>
-      </a>
-      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-flag">
-        <a class="dropdown-item" href="{{ url('lang/en') }}" data-language="en">
-          <i class="flag-icon flag-icon-us"></i> English
-        </a>
-        <a class="dropdown-item" href="{{ url('lang/fr') }}" data-language="fr">
-          <i class="flag-icon flag-icon-fr"></i> French
-        </a>
-        <a class="dropdown-item" href="{{ url('lang/de') }}" data-language="de">
-          <i class="flag-icon flag-icon-de"></i> German
-        </a>
-        <a class="dropdown-item" href="{{ url('lang/pt') }}" data-language="pt">
-          <i class="flag-icon flag-icon-pt"></i> Portuguese
-        </a>
-      </div> --}}
-      <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true">
-        @if (App::currentLocale() === 'ar')
-          <i class="flag-icon flag-icon-eg"></i>
-          <span class="selected-language">العربية</span>
-        @else
-          <i class="flag-icon flag-icon-us"></i>
-          <span class="selected-language">English</span>
-        @endif
-      </a>
-      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-flag">
-        <a class="dropdown-item" href="{{ route('lang', 'en') }}" data-language="en">
-          <i class="flag-icon flag-icon-us"></i> English
-        </a>
-        <a class="dropdown-item" href="{{ route('lang', 'ar') }}" data-language="eg">
-          <i class="flag-icon flag-icon-eg"></i> العربية
-        </a>
-      </div>
-    </li>
+{{--    <li class="nav-item dropdown dropdown-language">--}}
+{{--      --}}{{-- <a class="nav-link dropdown-toggle" id="dropdown-flag" href="#" data-bs-toggle="dropdown" aria-haspopup="true">--}}
+{{--        <i class="flag-icon flag-icon-us"></i>--}}
+{{--        <span class="selected-language">English</span>--}}
+{{--      </a>--}}
+{{--      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-flag">--}}
+{{--        <a class="dropdown-item" href="{{ url('lang/en') }}" data-language="en">--}}
+{{--          <i class="flag-icon flag-icon-us"></i> English--}}
+{{--        </a>--}}
+{{--        <a class="dropdown-item" href="{{ url('lang/fr') }}" data-language="fr">--}}
+{{--          <i class="flag-icon flag-icon-fr"></i> French--}}
+{{--        </a>--}}
+{{--        <a class="dropdown-item" href="{{ url('lang/de') }}" data-language="de">--}}
+{{--          <i class="flag-icon flag-icon-de"></i> German--}}
+{{--        </a>--}}
+{{--        <a class="dropdown-item" href="{{ url('lang/pt') }}" data-language="pt">--}}
+{{--          <i class="flag-icon flag-icon-pt"></i> Portuguese--}}
+{{--        </a>--}}
+{{--      </div> --}}
+{{--      <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true">--}}
+{{--        @if (App::currentLocale() === 'ar')--}}
+{{--          <i class="flag-icon flag-icon-eg"></i>--}}
+{{--          <span class="selected-language">العربية</span>--}}
+{{--        @else--}}
+{{--          <i class="flag-icon flag-icon-us"></i>--}}
+{{--          <span class="selected-language">English</span>--}}
+{{--        @endif--}}
+{{--      </a>--}}
+{{--      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-flag">--}}
+{{--        <a class="dropdown-item" href="{{ route('lang', 'en') }}" data-language="en">--}}
+{{--          <i class="flag-icon flag-icon-us"></i> English--}}
+{{--        </a>--}}
+{{--        <a class="dropdown-item" href="{{ route('lang', 'ar') }}" data-language="eg">--}}
+{{--          <i class="flag-icon flag-icon-eg"></i> العربية--}}
+{{--        </a>--}}
+{{--      </div>--}}
+{{--    </li>--}}
     <li class="nav-item d-none d-lg-block">
       @if (session()->has('theme'))
         @if (session()->get('theme') == 'light')
@@ -126,14 +126,14 @@
 
     </li>
 
-    <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon" data-feather="search"></i></a>
-      <div class="search-input">
-        <div class="search-input-icon"><i data-feather="search"></i></div>
-        <input class="form-control input" type="text" placeholder="Explore Vuexy..." tabindex="-1" data-search="search">
-        <div class="search-input-close"><i data-feather="x"></i></div>
-        <ul class="search-list search-list-main"></ul>
-      </div>
-    </li>
+{{--    <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon" data-feather="search"></i></a>--}}
+{{--      <div class="search-input">--}}
+{{--        <div class="search-input-icon"><i data-feather="search"></i></div>--}}
+{{--        <input class="form-control input" type="text" placeholder="Explore Vuexy..." tabindex="-1" data-search="search">--}}
+{{--        <div class="search-input-close"><i data-feather="x"></i></div>--}}
+{{--        <ul class="search-list search-list-main"></ul>--}}
+{{--      </div>--}}
+{{--    </li>--}}
 
     {{-- <li class="nav-item dropdown dropdown-cart me-25">
                     <a class="nav-link" href="javascript:void(0);" data-bs-toggle="dropdown">

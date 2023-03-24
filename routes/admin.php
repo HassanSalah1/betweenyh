@@ -10,6 +10,7 @@ Route::prefix('admin')->middleware(['theme'])->group(function () {
     Route::resource('permissions', Dashboard\PermissionController::class)->except('show');
     Route::resource('roles', Dashboard\RoleController::class);
     Route::resource('users', Dashboard\UserController::class);
+    Route::resource('socials', Dashboard\SocialController::class);
     // Route::get('users/permissions/{user}/edit', [Dashboard\UserController::class, 'editPermission'])->name('users.permissions.edit');
     // Route::post('users/permissions/{user}/update', [Dashboard\UserController::class, 'updatePermission'])->name('users.permissions.update');
 

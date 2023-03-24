@@ -61,6 +61,15 @@
                     "can": "create_users"
                 }
             ]
+        },
+        {
+            "name": "Socials",
+            "icon": "home",
+            "url": "admin/socials",
+            "slug": [
+                "dashboard"
+            ],
+            "can": "access_dashboard"
         }
     ]
 }

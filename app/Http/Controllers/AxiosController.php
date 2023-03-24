@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Social;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -36,5 +37,9 @@ class AxiosController extends Controller
     {
         $users = User::all();
         return $users;
+    }
+    public function socials(): Collection
+    {
+        return Social::orderBy('sort', 'ASC')->get();
     }
 }

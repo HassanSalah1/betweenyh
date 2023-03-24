@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.contentLayoutMaster')
 
-@section('title', __('messages.categoryCreate'))
+@section('title', 'Edit Social')
 
 @section('vendor-style')
   <!-- vendor css files -->
@@ -8,34 +8,30 @@
 @endsection
 
 @section('content')
+  <!-- Basic multiple Column Form section start -->
   <section>
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title">@lang('messages.categoryInfo')</h4>
+        <h4 class="card-title"> </h4>
       </div>
       <div class="card-body">
-        <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('socials.update', $social->id) }}" method="POST" enctype="multipart/form-data">
           @csrf
+          @method('put')
           <div class="row">
 
-            @include('dashboard.categories.form')
-
-            <div id="app">
-              @error('image')
-                <div style="display: block;" class="invalid-feedback">{{ $message }}</div>
-              @enderror
-              <image-cropper :width="435" :height="685"></image-cropper>
-            </div>
+            @include('dashboard.socials.form')
 
             <div class="col-12">
-              <button type="submit" class="btn btn-primary me-1">@lang('messages.submit')</button>
-              <button type="reset" class="btn btn-outline-secondary">@lang('messages.reset')</button>
+              <button type="submit" class="btn btn-primary me-1">@lang('Submit')</button>
+              <button type="reset" class="btn btn-outline-secondary">@lang('Reset')</button>
             </div>
           </div>
         </form>
       </div>
     </div>
   </section>
+  <!-- Basic Floating Label Form section end -->
 @endsection
 
 @section('vendor-script')
