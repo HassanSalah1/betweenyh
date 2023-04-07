@@ -28,7 +28,7 @@ class UserController extends Controller
     $validator = Validator::make($request->all(), [
       'name' => ['required', 'string', 'max:255'],
       'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-      'password' => ['required', 'confirmed', Rules\Password::defaults()],
+      'password' => ['required', Rules\Password::defaults()],
       //'phone' => [ 'digits:10','regex:/^(05)/'],
       //'phone' => [ 'required'],
       'image' => [ 'required'],
@@ -51,20 +51,16 @@ class UserController extends Controller
       'phone' => $request->phone ?? '',
       'code' => uniqid(),
       'image' => $request->image,
+      'fcm_token' => $request->fcm_token,
       'email_verified_at' => Carbon::now(),
     ]);
-//      $order = 1;
-//        foreach ($socials as $item){
-//            UserSocial::create([
-//                'user_id' => $user->id,
-//                'social_id' => $item->id,
-//                'sort' => $order,
-//            ]);
-//            $order++;
-//        }
+
+      $accessToken = $user->createToken('android')->plainTextToken;
+
       $date = [
       'status' => true,
-      'message' =>  'تم تسجيل الحساب بنجاح، قم بتسجيل الدخول'
+      'message' =>  'تم تسجيل الحساب بنجاح',
+      'data' => $this->userData($user, $accessToken),
     ];
     return response()->json($date);
   }
@@ -85,13 +81,14 @@ class UserController extends Controller
     }
     $user =  $request->user();
     if ( $request->has('fcm_token') && $request->fcm_token != ''){
-      $user->update(['fcm_token' => $request->fcm_token, 'notification_permission' => $request->notification_permission]);
+      $user->update(['fcm_token' => $request->fcm_token]);
     }
     $accessToken = $user->createToken($request->device_name)->plainTextToken;
 
     $date = [
       'status' => true,
-      'user' =>  $this->userData($user, $accessToken)
+      'message' => 'تم تسجيل الدخول',
+      'data' =>  $this->userData($user, $accessToken)
     ];
     return response()->json($date);
   }
@@ -136,6 +133,7 @@ class UserController extends Controller
     ];
     return response()->json($date);
   }
+
   public function createPassword(Request $request)
   {
     $validator = Validator::make($request->all(), [
@@ -151,13 +149,14 @@ class UserController extends Controller
       return response()->json(['status' => false, 'message' => 'البريد الالكتروني غير موجود'], 400);
     }
     $user->update(['password' => Hash::make($request->password)]);
-    $accessToken = $user->createToken($request->device_name)->plainTextToken;
+    $accessToken = $user->createToken('android')->plainTextToken;
     $date = [
       'status' => true,
       'user' => $this->userData($user, $accessToken)
     ];
     return response()->json($date);
   }
+
 
   public function profile(Request $request)
   {
@@ -195,10 +194,8 @@ class UserController extends Controller
       $data['password'] = Hash::make($request->password);
     } else{
       $rules = [
-        'name' => [ 'string', 'max:255'],
+        //'name' => [ 'string', 'max:255'],
         'email' => [ 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id, 'id')],
-        'gender' => [ 'string', 'min:3', 'max:255'],
-        'phone' => [ 'digits:10','regex:/^(05)/'],
       ];
     }
 
@@ -206,19 +203,19 @@ class UserController extends Controller
     if ($validator->fails()) {
       return response()->json(['status' => false, 'message' => $validator->errors()->first()], 400);
     }
-    if ($request->file('image')) {
-      if ($user->image && Storage::exists($user->image)) {
-        Storage::delete($user->image);
-      }
-      $image = Storage::put('public/users', $request->image);
-      $data['image'] = $image;
-    }
+//    if ($request->file('image')) {
+//      if ($user->image && Storage::exists($user->image)) {
+//        Storage::delete($user->image);
+//      }
+//      $image = Storage::put('public/users', $request->image);
+//      $data['image'] = $image;
+//    }
 
     $user->update($data);
     $date = [
       'status' => true,
       'message' => 'تم تعديل بيانات الحساب بنجاح',
-      'user' => $this->userData($user, $request->bearerToken())
+      'data' => $this->userData($user, $request->bearerToken())
     ];
     return response()->json($date);
   }
@@ -247,65 +244,18 @@ class UserController extends Controller
     ];
     return response()->json($date);
   }
-  public function socialCallback(Request $request)
-  {
 
-    $validator = Validator::make($request->all(), [
-      'provider' => ['required'],
-      'name' => ['string', 'max:255'],
-      'email' => ['email'],
-      //'image' => ['required'],
-
-    ]);
-    if ($validator->fails()) {
-      return response()->json(['status' => false, 'message' => $validator->errors()->first()], 400);
-    }
-    $provider = SocialProvider::where('provider_user_id', $request->provider_user_id)->first();
-    if ($provider){
-      $user = $provider->user;
-
-    }else{
-      $user = User::where('email', $request->email)->first();
-    }
-
-    if (!$user){
-      $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make(Str::random(8)),
-        'gender' => 'male',
-        'phone' => $request->phone ?? '',
-        'image' => $request->image ?? '',
-        'email_verified_at' => Carbon::now(),
-        'notification_permission' => $request->notification_permission
-      ]);
-      $socialAccounts = SocialProvider::create([
-        'user_id' => $user->id,
-        'provider_user_id' =>  $request->provider_user_id,
-        'provider' =>  $request->provider,
-      ]);
-    }
-    if ( $request->has('fcm_token') && $request->fcm_token != ''){
-      $user->update(['fcm_token' => $request->fcm_token, 'notification_permission' => $request->notification_permission]);
-    }
-    $accessToken = $user->createToken('web')->plainTextToken;
-    $date = [
-      'status' => true,
-      'user' =>  $this->userData($user, $accessToken)
-    ];
-    return response()->json($date);
-  }
   public function updateFcmToken(Request $request)
   {
     $validator = Validator::make($request->all(), [
       'fcm_token' => ['required'],
-      'notification_permission' => ['required'],
+      //'notification_permission' => ['required'],
     ]);
     if ($validator->fails()) {
       return response()->json(['status' => false, 'message' => $validator->errors()->first()], 400);
     }
 
-    $request->user()->update(['fcm_token' => $request->fcm_token,'notification_permission' => $request->notification_permission]);
+    $request->user()->update(['fcm_token' => $request->fcm_token]);
 
     $date = [
       'status' => true,
@@ -315,22 +265,46 @@ class UserController extends Controller
   }
   public function userData($user, $token)
   {
+    $socials = $user->socials->sortBy('sort')->map(function ($map){
 
-    if ($user->image) {
-        $image_url = url(Storage::url($user->image));
-    }else{
-        $image_url = asset('/images/avatar.png');
-    }
-    return [
-        'id' => $user->id,
-        'name' => $user->name,
-        'email' => $user->email,
-        'phone' => $user->phone ?? null,
-        'image' => $image_url,
-        'title' => $user->title,
-        'bio' => $user->bio,
-        'access_token' => $token,
-    ];
+          if ($map->social->image) {
+              $image_url = url(Storage::url($map->social->image));
+          }else{
+              $image_url = url(asset('/images/avatar.png'));
+          }
+          return [
+              'id' => $map->id,
+              'name' => $map->social->name,
+              'url' => $map->url,
+              'image' => $image_url,
+
+          ];
+      });
+    $services = $user->services->sortBy('sort')->map(function ($map){
+          return [
+              'id' => $map->id,
+              'title' => $map->title,
+              'description' => $map->description,
+              'url' => $map->url,
+
+          ];
+      });
+
+        return [
+            'user' => [
+                'id' => $user->id,
+                'code' => $user->code,
+                'name' => $user->name,
+                'email' => $user->email,
+                'phone' => $user->phone ?? null,
+                'image' => $user->image,
+                'title' => $user->title,
+                'bio' => $user->bio,
+                'access_token' => $token,
+            ],
+            'socials' => $socials,
+            'services' => $services
+        ];
   }
 
     public function users()

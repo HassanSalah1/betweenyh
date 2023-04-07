@@ -29,6 +29,7 @@ class User extends Authenticatable
         'bio',
         'printed',
         'code',
+        'fcm_token',
     ];
 
     /**
@@ -53,5 +54,9 @@ class User extends Authenticatable
     public function socials()
     {
         return $this->hasMany(UserSocial::class);
+    }
+    public function services()
+    {
+        return $this->hasMany(Services::class);
     }
 }
