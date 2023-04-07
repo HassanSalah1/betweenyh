@@ -28,6 +28,7 @@
                 <th>@lang('Name')</th>
                 <th>@lang('Email')</th>
                 <th>@lang('Created At')</th>
+                <th>@lang('Created From')</th>
                 <th>@lang('Actions')</th>
               </tr>
             </thead>
@@ -64,6 +65,9 @@
               },
               {
                 data: 'created_at'
+              },
+              {
+                data: 'created_at_from'
               },
               {
                 mData: 'action',

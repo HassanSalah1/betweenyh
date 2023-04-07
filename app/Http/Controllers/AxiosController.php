@@ -33,10 +33,18 @@ class AxiosController extends Controller
     /**
      * Get all users .
      */
-    public function users(): Collection
+    public function users()
     {
-        $users = User::all();
-        return $users;
+        return User::all()->map(function ($user){
+            return [
+              'id' => $user->id,
+              'name' => $user->name,
+              'email' => $user->email,
+              'created_at' => $user->created_at->format('Y-m-d h:i:s A'),
+              'created_at_from' => $user->created_at->diffForHumans(),
+            ];
+        });
+
     }
     public function socials(): Collection
     {
