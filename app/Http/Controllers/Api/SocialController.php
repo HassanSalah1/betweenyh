@@ -90,4 +90,23 @@ class SocialController extends Controller
         ];
         return response()->json($date);
     }
+    public function destroy($id)
+    {
+        $social = UserSocial::where( ['social_id' => $id])->first();
+        if ($social){
+            $social->delete();
+            $date = [
+                'status' => true,
+                'message' => 'Deleted Successfully',
+                'data' => null,
+            ];
+            return response()->json($date);
+        }
+        $date = [
+            'status' => true,
+            'message' => 'Social not found',
+            'data' => null,
+        ];
+        return response()->json($date);
+    }
 }

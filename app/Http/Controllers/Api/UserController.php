@@ -276,6 +276,7 @@ class UserController extends Controller
               'id' => $map->id,
               'name' => $map->social->name,
               'url' => $map->url,
+              'sort' => $map->sort,
               'image' => $image_url,
 
           ];
@@ -286,6 +287,7 @@ class UserController extends Controller
               'title' => $map->title,
               'description' => $map->description,
               'url' => $map->url,
+              'sort' => $map->sort,
 
           ];
       });

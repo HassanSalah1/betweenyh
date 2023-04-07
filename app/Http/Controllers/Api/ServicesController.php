@@ -24,21 +24,23 @@ use function App\Http\Controllers\Api\V1\str_contains;
 
 class ServicesController extends Controller
 {
+
     public function services()
   {
-     $services = Services::all()->map(function ($map){
+     $services = auth()->user()->services->sortBy('sort')->map(function ($map){
         return[
          'id' => $map->id,
          'title' => $map->title,
          'description' => $map->description,
          'url' => $map->url,
-
+         'sort' => $map->sort,
         ];
      });
 
     $date = [
       'status' => true,
-      'services' =>  $services
+      'message' => null,
+      'date' =>  $services
     ];
     return response()->json($date);
   }
@@ -66,10 +68,32 @@ class ServicesController extends Controller
          );
         $date = [
             'status' => true,
-            'message' => 'Added Successfully'
+            'message' => 'Added Successfully',
+            'data' => null
         ];
 
         return response()->json($date);
 
+    }
+
+    public function destroy($id)
+    {
+        $service = Services::find($id);
+
+        if ($service){
+            $service->delete();
+            $date = [
+                'status' => true,
+                'message' => 'Deleted Successfully',
+                'data' => null,
+            ];
+            return response()->json($date);
+        }
+        $date = [
+            'status' => true,
+            'message' => 'Service not found',
+            'data' => null,
+        ];
+        return response()->json($date);
     }
 }
