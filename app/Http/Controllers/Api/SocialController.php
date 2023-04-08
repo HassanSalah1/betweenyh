@@ -95,23 +95,16 @@ class SocialController extends Controller
         ];
         return response()->json($date);
     }
-    public function sort(Request $request)
+    public function update(Request $request)
     {
+        foreach ($request->all() as $data) {
+            UserSocial::updateOrInsert(['id' => $data['id']], $data);
+        }
 
-        UserSocial::updateOrCreate([
-            'user_id'   => Auth::user()->id,
-            'social_id' => $request->social_id
-        ],
-            [
-                'user_id'   => Auth::user()->id,
-                'social_id' => $request->social_id,
-                'url' => $request->url,
-                'status' => $request->status,
-                'sort' => $request->sort ?? UserSocial::where('user_id',Auth::user()->id)->max('sort')+1,
-            ]
-        );
         $date = [
-            'status' => true
+            'status' => true,
+            'message' => 'Updated Successfully',
+            'data' => null,
         ];
         return response()->json($date);
     }

@@ -33,6 +33,7 @@ Route::get('/get-user-info', [UserController::class , 'profile'])->middleware('a
 Route::get('/socials', [SocialController::class , 'socials'])->middleware('auth:sanctum');
 Route::get('/socials/user', [SocialController::class , 'userSocials'])->middleware('auth:sanctum');
 Route::post('/socials/user', [SocialController::class , 'createOrUpdate'])->middleware('auth:sanctum');
+Route::post('/socials/update', [SocialController::class , 'update'])->middleware('auth:sanctum');
 Route::post('/socials/delete/{id}', [SocialController::class , 'destroy'])->middleware('auth:sanctum');
 
 
@@ -41,3 +42,4 @@ Route::get('/services', [ServicesController::class , 'services'])->middleware('a
 Route::get('/services/user', [ServicesController::class , 'user'])->middleware('auth:sanctum');
 Route::post('/services/user', [ServicesController::class , 'createOrUpdate'])->middleware('auth:sanctum');
 Route::post('/services/delete/{id}', [ServicesController::class , 'destroy'])->middleware('auth:sanctum');
+Route::post('/services/update', [ServicesController::class , 'update'])->middleware('auth:sanctum');

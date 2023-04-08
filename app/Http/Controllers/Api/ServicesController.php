@@ -64,6 +64,7 @@ class ServicesController extends Controller
              'title' => $request->title,
              'description' => $request->description,
              'url' => $request->url,
+             'sort' => Services::where('user_id',Auth::user()->id)->max('sort')+1,
          ]
          );
         $date = [
@@ -74,6 +75,18 @@ class ServicesController extends Controller
 
         return response()->json($date);
 
+    }
+    public function update(Request $request)
+    {
+        foreach ($request->all() as $data) {
+            Services::updateOrInsert(['id' => $data['id']], $data);
+        }
+        $date = [
+            'status' => true,
+            'message' => 'Updated Successfully',
+            'data' => null,
+        ];
+        return response()->json($date);
     }
 
     public function destroy($id)
