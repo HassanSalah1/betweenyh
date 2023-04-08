@@ -170,7 +170,8 @@ class UserController extends Controller
     }
     $date = [
       'status' => true,
-      'user' => $this->userData($user, $accessToken)
+      'message' => null,
+      'data' => $this->userData($user, $accessToken)
     ];
     return response()->json($date);
   }
@@ -280,7 +281,7 @@ class UserController extends Controller
               'image' => $image_url,
 
           ];
-      });
+      })->values();
     $services = $user->services->sortBy('sort')->map(function ($map){
           return [
               'id' => $map->id,
@@ -290,7 +291,7 @@ class UserController extends Controller
               'sort' => $map->sort,
 
           ];
-      });
+      })->values();
 
         return [
             'user' => [

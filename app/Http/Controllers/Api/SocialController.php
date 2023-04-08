@@ -39,6 +39,31 @@ class SocialController extends Controller
     ];
     return response()->json($date);
   }
+    public function userSocials()
+    {
+        $socials = auth()->user()->socials->sortBy('sort')->map(function ($map){
+            if ($map->social->image) {
+                $image_url = url(Storage::url($map->social->image));
+            }else{
+                $image_url = url(asset('/images/avatar.png'));
+            }
+            return [
+                'id' => $map->id,
+                'name' => $map->social->name,
+                'url' => $map->url,
+                'sort' => $map->sort,
+                'image' => $image_url,
+
+            ];
+        })->values();
+
+        $date = [
+            'status' => true,
+            'message' => null,
+            'data' =>  $socials
+        ];
+        return response()->json($date);
+    }
 
     public function createOrUpdate(Request $request)
     {

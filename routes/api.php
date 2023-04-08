@@ -26,10 +26,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/users', [UserController::class , 'users'])->middleware('auth:sanctum');
 Route::post('/update-profile', [UserController::class , 'updateProfile'])->middleware('auth:sanctum');
 Route::get('/users/{code}', [UserController::class , 'user'])->middleware('auth:sanctum');
+Route::get('/get-user-info', [UserController::class , 'profile'])->middleware('auth:sanctum');
 
 
 
 Route::get('/socials', [SocialController::class , 'socials'])->middleware('auth:sanctum');
+Route::get('/socials/user', [SocialController::class , 'userSocials'])->middleware('auth:sanctum');
 Route::post('/socials/user', [SocialController::class , 'createOrUpdate'])->middleware('auth:sanctum');
 Route::post('/socials/delete/{id}', [SocialController::class , 'destroy'])->middleware('auth:sanctum');
 
