@@ -274,10 +274,10 @@ class UserController extends Controller
               $image_url = url(asset('/images/avatar.png'));
           }
           return [
-              'id' => $map->id,
+              'id' => $map->social_id,
               'name' => $map->social->name,
               'url' => $map->url,
-              'sort' => $map->sort,
+              'status' => $map->status,
               'image' => $image_url,
 
           ];
@@ -288,7 +288,8 @@ class UserController extends Controller
               'title' => $map->title,
               'description' => $map->description,
               'url' => $map->url,
-              'sort' => $map->sort,
+              'status' => $map->status,
+
 
           ];
       })->values();

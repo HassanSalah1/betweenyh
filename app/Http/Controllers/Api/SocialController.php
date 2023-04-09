@@ -48,10 +48,10 @@ class SocialController extends Controller
                 $image_url = url(asset('/images/avatar.png'));
             }
             return [
-                'id' => $map->id,
+                'id' => $map->social_id,
                 'name' => $map->social->name,
                 'url' => $map->url,
-                'sort' => $map->sort,
+                'status' => $map->status,
                 'image' => $image_url,
 
             ];
@@ -68,7 +68,7 @@ class SocialController extends Controller
     public function createOrUpdate(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'social_id' => ['required'],
+            'id' => ['required'],
             'url' => ['required'],
             'status' => ['required'],
 
@@ -79,11 +79,11 @@ class SocialController extends Controller
         }
          UserSocial::updateOrCreate([
              'user_id'   => Auth::user()->id,
-             'social_id' => $request->social_id
+             'social_id' => $request->id
          ],
          [
              'user_id'   => Auth::user()->id,
-             'social_id' => $request->social_id,
+             'social_id' => $request->id,
              'url' => $request->url,
              'status' => $request->status,
              'sort' => $request->sort ?? UserSocial::where('user_id',Auth::user()->id)->max('sort')+1,
@@ -91,12 +91,14 @@ class SocialController extends Controller
          );
         $date = [
             'status' => true,
-            'message' => 'Added Successfully'
+            'message' => 'Added Successfully',
+            'data' => null
         ];
         return response()->json($date);
     }
     public function update(Request $request)
     {
+
         foreach ($request->all() as $data) {
             UserSocial::updateOrInsert(['id' => $data['id']], $data);
         }
