@@ -35,7 +35,8 @@ class SocialController extends Controller
 
     $date = [
       'status' => true,
-      'socials' =>  $socials
+      'message' => '',
+      'data' =>  $socials
     ];
     return response()->json($date);
   }
@@ -75,7 +76,11 @@ class SocialController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['status' => false, 'message' => $validator->errors()->first()], 400);
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first(),
+                'data' => null
+            ], 400);
         }
          UserSocial::updateOrCreate([
              'user_id'   => Auth::user()->id,
@@ -98,9 +103,14 @@ class SocialController extends Controller
     }
     public function update(Request $request)
     {
-
+        $sort = 1;
         foreach ($request->all() as $data) {
-            UserSocial::updateOrInsert(['id' => $data['id']], $data);
+            UserSocial::where(['social_id' => $data['id'], 'user_id' => auth()->id()])->update([
+                'sort' => $sort,
+                'status' => $request->status,
+                'url' => $request->url,
+            ]);
+            $sort++;
         }
 
         $date = [

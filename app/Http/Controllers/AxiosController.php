@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Social;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -50,4 +51,22 @@ class AxiosController extends Controller
     {
         return Social::orderBy('sort', 'ASC')->get();
     }
+    public function orders()
+    {
+        return Order::all()->map(function ($order){
+            return [
+                'id' => $order->id,
+                'name' => $order->user->name,
+                'email' => $order->user->email,
+                'phone' => $order->phone,
+                'address' => $order->address,
+                'status' => $order->status,
+                'price' => $order->price,
+                'created_at' => $order->created_at->format('Y-m-d h:i:s A'),
+                'created_at_from' => $order->created_at->diffForHumans(),
+            ];
+        });
+
+    }
+
 }

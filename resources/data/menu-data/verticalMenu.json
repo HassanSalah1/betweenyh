@@ -70,6 +70,15 @@
                 "dashboard"
             ],
             "can": "access_dashboard"
+        },
+        {
+            "name": "Orders",
+            "icon": "dollar-sign",
+            "url": "admin/orders",
+            "slug": [
+                "dashboard"
+            ],
+            "can": "access_dashboard"
         }
     ]
 }

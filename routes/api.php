@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use  \App\Http\Controllers\Api\UserController;
 use \App\Http\Controllers\Api\SocialController;
 use \App\Http\Controllers\Api\ServicesController;
-
+use \App\Http\Controllers\Api\OrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -43,3 +43,7 @@ Route::get('/services/user', [ServicesController::class , 'user'])->middleware('
 Route::post('/services/user', [ServicesController::class , 'createOrUpdate'])->middleware('auth:sanctum');
 Route::post('/services/delete/{id}', [ServicesController::class , 'destroy'])->middleware('auth:sanctum');
 Route::post('/services/update', [ServicesController::class , 'update'])->middleware('auth:sanctum');
+
+
+Route::get('/order-status', [OrderController::class , 'order'])->middleware('auth:sanctum');
+Route::post('/order-card', [OrderController::class , 'create'])->middleware('auth:sanctum');
