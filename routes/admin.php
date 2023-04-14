@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard;
 
 // 'auth',
-Route::prefix('admin')->middleware(['theme'])->group(function () {
+Route::prefix('admin')->middleware(['theme', 'auth'])->group(function () {
     Route::get('dashboard', [Dashboard\DashboardController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('dashboard/{theme}', [Dashboard\DashboardController::class, 'theme'])->name('admin.theme');
     Route::resource('permissions', Dashboard\PermissionController::class)->except('show');
