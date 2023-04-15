@@ -89,15 +89,18 @@ class OrderController extends Controller
             ]);
             $date = [
                 'status' => true,
-                'message' =>  "Your order status changed successfully" ,
+                'message' =>  "Your order status confirmed successfully" ,
                 'data' => null
             ];
             return response()->json($date);
 
         }
+        $order->update([
+            'status' => 'Refused'
+        ]);
         $date = [
             'status' => true,
-            'message' =>  "Your order status not Confirmed" ,
+            'message' =>  "Your order status Refused" ,
             'data' => null
         ];
         return response()->json($date);

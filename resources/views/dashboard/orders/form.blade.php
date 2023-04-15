@@ -6,6 +6,7 @@
             <option value="Processing" {{ isset($order) && $order->status == 'Processing'  ? 'selected' : '' }}>Processing</option>
             <option value="Waiting confirmation from client" {{ isset($order) && $order->status == 'Waiting confirmation from client'  ? 'selected' : '' }}>Waiting confirmation from client</option>
             <option value="Confirmed" {{ isset($order) && $order->status == 'Confirmed'  ? 'selected' : '' }}>Confirmed</option>
+            <option value="Refused" {{ isset($order) && $order->status == 'Refused'  ? 'selected' : '' }}>Refused</option>
             <option value="Shipped" {{ isset($order) && $order->status == 'Shipped'  ? 'selected' : '' }}>Shipped</option>
             <option value="Delivered successfully" {{ isset($order) && $order->status == 'Delivered successfully'  ? 'selected' : '' }}>Delivered successfully</option>
         </select>
