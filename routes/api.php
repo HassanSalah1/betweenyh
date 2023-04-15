@@ -47,3 +47,4 @@ Route::post('/services/update', [ServicesController::class , 'update'])->middlew
 
 Route::get('/order-status', [OrderController::class , 'order'])->middleware('auth:sanctum');
 Route::post('/order-card', [OrderController::class , 'create'])->middleware('auth:sanctum');
+Route::post('/order-confirm', [OrderController::class , 'confirm'])->middleware('auth:sanctum');
