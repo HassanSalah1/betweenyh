@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,15 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    public function user($code)
+    {
+        $user = User::where('code', $code)->first();
+        if (!$user) abort(404);
+
+        return view('profile.info', [
+            'user' => $user,
+        ]);
+    }
     /**
      * Display the user's profile form.
      */

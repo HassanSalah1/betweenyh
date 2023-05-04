@@ -42,4 +42,5 @@ class HomeController extends Controller
         // dd('dashboard');
         return redirect()->route('admin.dashboard');
     }
+
 }

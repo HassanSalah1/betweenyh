@@ -314,15 +314,15 @@ class UserController extends Controller
     public function users()
     {
         $users = User::all()->map(function ($map){
-            if ($map->image) {
-                $image_url = url(Storage::url($map->image));
-            }else{
-                $image_url = asset('/images/avatar.png');
-            }
+//            if ($map->image) {
+//                $image_url = url(Storage::url($map->image));
+//            }else{
+//                $image_url = asset('/images/avatar.png');
+//            }
             return [
                 'name' => $map->name,
                 'code' => $map->code,
-                'image' => $image_url,
+                'image' => $map->image,
                 'printed' => (bool)$map->printed,
 
             ];
@@ -354,11 +354,11 @@ class UserController extends Controller
 
             ];
         });
-        if ($user->image) {
-            $image_url = $user->image; //url(Storage::url($user->image));
-        }else{
-            $image_url = url(asset('/images/avatar.png'));
-        }
+//        if ($user->image) {
+//            $image_url = $user->image; //url(Storage::url($user->image));
+//        }else{
+//            $image_url = url(asset('/images/avatar.png'));
+//        }
         return [
             'data' => [
                 'user' => [
@@ -366,7 +366,7 @@ class UserController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                     'phone' => $user->phone ?? null,
-                    'image' => $image_url,
+                    'image' => $user->image,
                     'title' => $user->title,
                     'bio' => $user->bio,
                 ],

@@ -13,6 +13,10 @@ Route::middleware('locale')->group(function () {
     require __DIR__ . '/admin.php';
 });
 
+
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::get('/user/{code}', [ProfileController::class , 'user']);
+
 Route::get('/dashboard', function () {
     return redirect('/admin/dashboard');
     //return view('dashboard');

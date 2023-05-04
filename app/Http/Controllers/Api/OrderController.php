@@ -12,7 +12,7 @@ class OrderController extends Controller
 {
     public function order()
   {
-      $order = auth()->user()->order;
+      $order = auth()->user()->order->last();
       if (!$order){
           $date = [
               'status' => true,
@@ -21,6 +21,7 @@ class OrderController extends Controller
           ];
           return response()->json($date);
       }
+
       $status = [
           'Request' => 1,
           'Processing' =>2,
@@ -65,7 +66,7 @@ class OrderController extends Controller
          );
         $date = [
             'status' => true,
-            'message' => 'Your Request Added Successfully',
+            'message' => 'Card requested Successfully, wait for processing',
             'data' => null
         ];
         return response()->json($date);
