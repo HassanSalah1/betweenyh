@@ -107,8 +107,8 @@ class SocialController extends Controller
         foreach ($request->all() as $data) {
             UserSocial::where(['social_id' => $data['id'], 'user_id' => auth()->id()])->update([
                 'sort' => $sort,
-                'status' => $request->status,
-                'url' => $request->url,
+                'status' => $data['status'],
+                'url' => $data['url'],
             ]);
             $sort++;
         }
