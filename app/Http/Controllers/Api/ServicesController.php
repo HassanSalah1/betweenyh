@@ -27,20 +27,19 @@ class ServicesController extends Controller
 
     public function services()
   {
-     $services = auth()->user()->services->sortBy('sort')->map(function ($map){
+     $services = auth()->user()->services->map(function ($map){
         return[
          'id' => $map->id,
          'title' => $map->title,
          'description' => $map->description,
          'url' => $map->url,
-         'sort' => $map->sort,
         ];
-     });
+     })->values();
 
     $date = [
       'status' => true,
       'message' => null,
-      'date' =>  $services
+      'data' =>  $services
     ];
     return response()->json($date);
   }
