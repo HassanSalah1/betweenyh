@@ -33,7 +33,7 @@ class OrderController extends Controller
       ];
       $date = [
           'status' => true,
-          'message' =>  "Your order status $order->status" ,
+          'message' =>  $order->price ,
           'data' => $status[$order->status]
       ];
       return response()->json($date);
