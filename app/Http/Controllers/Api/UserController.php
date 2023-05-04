@@ -93,6 +93,30 @@ class UserController extends Controller
     return response()->json($date);
   }
 
+    public function updateNotification(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'allow' => ['required'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first(),
+                'data' => null
+            ], 400);
+        }
+        $allow = $request->allow == "true" ? 1 : 0;
+        auth()->user()->update([
+           'allow_notification'  => $allow
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'updated',
+            'data' => null
+        ]);
+    }
   public function forgetPassword(Request $request)
   {
     $validator = Validator::make($request->all(), [

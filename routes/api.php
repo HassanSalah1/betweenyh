@@ -23,6 +23,7 @@ Route::post('/login', [UserController::class , 'login']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::get('/settings', [HomeController::class , 'index'])->middleware('auth:sanctum');
 
 
@@ -31,6 +32,7 @@ Route::post('/update-profile', [UserController::class , 'updateProfile'])->middl
 Route::get('/users/{code}', [UserController::class , 'user'])->middleware('auth:sanctum');
 Route::get('/get-user-info', [UserController::class , 'profile'])->middleware('auth:sanctum');
 
+Route::post('/allow-notification', [UserController::class , 'updateNotification'])->middleware('auth:sanctum');
 
 
 Route::get('/socials', [SocialController::class , 'socials'])->middleware('auth:sanctum');
