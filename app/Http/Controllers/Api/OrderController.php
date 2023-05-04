@@ -84,7 +84,7 @@ class OrderController extends Controller
                 'data' => null
             ], 400);
         }
-        $order = auth()->user()->order;
+        $order = auth()->user()->order->last();
         if (!$order){
             $date = [
                 'status' => false,
