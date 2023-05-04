@@ -6,6 +6,7 @@ use  \App\Http\Controllers\Api\UserController;
 use \App\Http\Controllers\Api\SocialController;
 use \App\Http\Controllers\Api\ServicesController;
 use \App\Http\Controllers\Api\OrderController;
+use \App\Http\Controllers\Api\HomeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,6 +23,8 @@ Route::post('/login', [UserController::class , 'login']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/settings', [HomeController::class , 'index'])->middleware('auth:sanctum');
+
 
 Route::get('/users', [UserController::class , 'users'])->middleware('auth:sanctum');
 Route::post('/update-profile', [UserController::class , 'updateProfile'])->middleware('auth:sanctum');
