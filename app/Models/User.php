@@ -30,6 +30,7 @@ class User extends Authenticatable
         'printed',
         'code',
         'fcm_token',
+        'notification_status',
     ];
 
     /**

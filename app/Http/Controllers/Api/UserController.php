@@ -319,12 +319,13 @@ class UserController extends Controller
 //            }else{
 //                $image_url = asset('/images/avatar.png');
 //            }
+            $code =  $map->code ?? 123231;
             return [
                 'name' => $map->name,
                 'code' => $map->code,
                 'image' => $map->image,
+                'url' =>route('user.profile', $code ),
                 'printed' => (bool)$map->printed,
-
             ];
         });
         return [

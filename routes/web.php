@@ -15,7 +15,8 @@ Route::middleware('locale')->group(function () {
 
 
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::get('/user/{code}', [ProfileController::class , 'user']);
+
+Route::get('/user/{code}', [ProfileController::class , 'user'])->name('user.profile');
 
 Route::get('/dashboard', function () {
     return redirect('/admin/dashboard');
