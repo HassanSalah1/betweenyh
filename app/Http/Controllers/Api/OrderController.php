@@ -17,14 +17,23 @@ class OrderController extends Controller
           $date = [
               'status' => false,
               'message' =>  'User does not have order ' ,
-              'data' => null
+              'data' => 0
           ];
           return response()->json($date);
       }
+      $status = [
+          'Request' => 1,
+          'Processing' =>2,
+          'Waiting confirmation from client' =>3,
+          'Confirmed' =>4,
+          'Refused' =>5,
+          'Shipped' =>6,
+          'Delivered successfully' =>7,
+      ];
       $date = [
           'status' => true,
           'message' =>  "Your order status $order->status" ,
-          'data' => null
+          'data' => $status[$order->status]
       ];
       return response()->json($date);
       //Request
