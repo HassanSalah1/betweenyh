@@ -15,7 +15,7 @@ class OrderController extends Controller
       $order = auth()->user()->order;
       if (!$order){
           $date = [
-              'status' => false,
+              'status' => true,
               'message' =>  'User does not have order ' ,
               'data' => 0
           ];
