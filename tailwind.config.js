@@ -9,9 +9,19 @@ module.exports = {
     ],
 
     theme: {
+        // extend: {
+        //     fontFamily: {
+        //         sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+        //     },
+        // },
         extend: {
-            fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+            colors: {
+                transparent: 'transparent',
+                current: 'currentColor',
+                main_color_1: '#F0E2C5',
+            },
+            screens: {
+                'sm': {'max': '767px'},
             },
         },
     },

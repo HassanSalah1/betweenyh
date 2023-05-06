@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function socials()
     {
-        return $this->hasMany(UserSocial::class);
+        return $this->hasMany(UserSocial::class)->orderBy('sort');
     }
     public function services()
     {
