@@ -32,7 +32,6 @@
         <div class="container mx-auto">
             <div class="bg-white border border-gray-200 rounded-2xl shadow">
                 <a href="#" class="h-24 lg:h-72 block">
-
                     <img class="rounded-t-lg w-full h-full object-cover" src="/images/bg-user.jpg" alt="" />
                 </a>
                 <div class="p-5 relative">
@@ -70,7 +69,7 @@
                 <ul class="grid grid-cols-4 lg:grid-cols-8 place-items-center px-4 gap-x-2 gap-y-4 lg:gap-10">
                     @foreach($user->socials->where('status', 1) as $item)
                         <li class="flex">
-                            <a href="{{$item->url}}"><img src="{{\Illuminate\Support\Facades\Storage::url($item->social->image)}}" alt="" class="w-10 mx-auto lg:w-16 mb-2" /> <span class="text-gray-700">{{$item->social->name}}</span></a>
+                            <a href="http://{{$item->url}}"><img src="{{\Illuminate\Support\Facades\Storage::url($item->social->image)}}" alt="" class="w-10 mx-auto lg:w-16 mb-2" /> <span class="text-gray-700">{{$item->social->name}}</span></a>
                         </li>
                     @endforeach
                 </ul>
