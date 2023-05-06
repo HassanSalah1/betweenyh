@@ -24,7 +24,7 @@
 <main class="bg-gray-200">
     <header class="py-2 bg-white">
         <div class="flex items-center justify-between container mx-auto">
-            <img src="/images/logo.svg" alt="" class="rounded-full w-14" />
+            <img src="/images/logo.svg" alt=""  style='width: 65px;' />
             <button class="w-40 py-1 rounded-full border-blue-600 border-2 text-blue-700 hover:text-white hover:bg-blue-600 transition">Get your card</button>
         </div>
     </header>
