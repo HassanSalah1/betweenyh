@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('image')->nullable();
             $table->string('title')->nullable();
+            $table->string('fcm_token')->nullable();
             $table->longText('bio')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('printed')->default(0);

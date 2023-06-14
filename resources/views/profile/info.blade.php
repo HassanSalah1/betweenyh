@@ -4,8 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{{$user->name}}</title>
+{{--    <link rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
+
+{{--    <script src="https://cdn.tailwindcss.com"></script>--}}
+    <script src="{{ asset('tailwind.js') }}"></script>
+
     <style type="text/tailwindcss">
         @layer utilities {
             .content-auto {
@@ -36,9 +40,9 @@
                 </a>
                 <div class="p-5 relative">
                     @if($user->image)
-                        <img class="rounded-full w-16 absolute -top-10 border-4" src="data:image/png;base64,{{$user->image}}" alt="" />
+                        <img class="rounded-full w-16 h-16 absolute -top-10 border-4" src="data:image/png;base64,{{$user->image}}" alt="" />
                     @else
-                        <img class="rounded-full w-16 absolute -top-10 border-4"  src="https://i.pravatar.cc/100" alt="" />
+                        <img class="rounded-full w-16 h-16 absolute -top-10 border-4"  src="https://i.pravatar.cc/100" alt="" />
                     @endif
                     <a href="#" style='cursor: default'>
                         <h5 class="mb-2 mt-4 text-2xl font-bold tracking-tight text-blue-800">{{$user->name}}</h5>
@@ -55,6 +59,7 @@
             </div>
         </div>
     </section>
+
     <div>
         <div class="container mx-auto pb-10">
             <div class="flex items-center justify-between py-4 px-2 lg:px-10 border-b bg-white rounded-t-2xl">
@@ -67,10 +72,35 @@
 
             <div class="bg-white px-2 lg:px-10 py-6 rounded-b-2xl">
                 <ul class="grid grid-cols-4 lg:grid-cols-8 place-items-center px-4 gap-x-2 gap-y-4 lg:gap-10">
-                    @foreach($user->socials->where('status', 1) as $item)
-                        <li class="flex">
-                            <a href="http://{{$item->url}}"><img src="{{\Illuminate\Support\Facades\Storage::url($item->social->image)}}" alt="" class="w-10 mx-auto lg:w-16 mb-2" /> <span class="text-gray-700">{{$item->social->name}}</span></a>
-                        </li>
+
+                    @foreach($user->socials->where('status', 1)->sortBy('sort') as $item)
+{{--                        @if(is_numeric($item->url) || $item->social->name == 'whatsapp' || $item->social->name == 'Whatsapp')--}}
+{{--                            <li class="flex">--}}
+{{--                                <a href="https://api.whatsapp.com/send?phone= {{$item->url}}" >--}}
+{{--                                <img src="{{\Illuminate\Support\Facades\Storage::url($item->social->image)}}" alt="" class="w-10 mx-auto lg:w-16 mb-2" />--}}
+{{--                                <span class="text-gray-700">{{$item->social->name}} </span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        @else--}}
+{{--                            <li class="flex">--}}
+{{--                                <a href="http://{{$item->url}}"><img src="{{\Illuminate\Support\Facades\Storage::url($item->social->image)}}" alt="" class="w-10 mx-auto lg:w-16 mb-2" /> <span class="text-gray-700">{{$item->social->name}}</span></a>--}}
+{{--                            </li>--}}
+{{--                        @endif--}}
+                            @if(is_numeric($item->url) || in_array($item->social->name, ['whatsapp', 'Whatsapp']))
+                                <li class="flex">
+                                    <a href="https://api.whatsapp.com/send?phone={{$item->url}}">
+                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($item->social->image) }}" alt="{{ $item->social->name }}" class="w-10 mx-auto lg:w-16 mb-2" />
+                                        <span class="text-gray-700">{{ $item->social->name }}</span>
+                                    </a>
+                                </li>
+                            @else
+                                <li class="flex">
+                                    <a href="http://{{ $item->url }}">
+                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($item->social->image) }}" alt="{{ $item->social->name }}" class="w-10 mx-auto lg:w-16 mb-2" />
+                                        <span class="text-gray-700">{{ $item->social->name }}</span>
+                                    </a>
+                                </li>
+                            @endif
                     @endforeach
                 </ul>
             </div>
