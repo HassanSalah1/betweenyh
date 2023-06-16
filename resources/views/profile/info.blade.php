@@ -88,7 +88,7 @@
 {{--                        @endif--}}
                             @if(is_numeric($item->url) || in_array($item->social->name, ['whatsapp', 'Whatsapp']))
                                 <li class="flex">
-                                    <a href="https://api.whatsapp.com/send?phone=+2{{$item->url}}">
+                                    <a href="https://api.whatsapp.com/send?phone={{$item->url}}">
                                         <img src="{{ \Illuminate\Support\Facades\Storage::url($item->social->image) }}" alt="{{ $item->social->name }}" class="w-10 mx-auto lg:w-16 mb-2" />
                                         <span class="text-gray-700">{{ $item->social->name }}</span>
                                     </a>
