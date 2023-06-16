@@ -19,6 +19,8 @@ use \App\Http\Controllers\Api\HomeController;
 */
 Route::post('/register', [UserController::class , 'register']);
 Route::post('/login', [UserController::class , 'login']);
+Route::post('/forget-password', [UserController::class , 'forgetPassword']);
+Route::post('/change-password', [UserController::class , 'createPassword']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

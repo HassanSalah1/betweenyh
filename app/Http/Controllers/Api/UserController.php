@@ -130,11 +130,12 @@ class UserController extends Controller
     if (!$user) {
       return response()->json(['status' => false, 'message' => 'البريد الالكتروني غير موجود'], 400);
     }
-    //$code = rand(100000,999999);
-    $code = 123456;
+    $code = rand(100000,999999);
+//    $code = 123456;
     $date = [
       'status' => true,
-      'message' => 'تم ارسال الكود الي البريدالالكتروني '
+      'message' => 'تم ارسال الكود الي البريدالالكتروني ',
+      'data' => $code
     ];
     return response()->json($date);
   }
@@ -163,7 +164,7 @@ class UserController extends Controller
     $validator = Validator::make($request->all(), [
       'email' => ['required', 'string', 'email', 'max:191'],
       'password' => ['required', 'string', 'min:8'],
-      'device_name' => 'required',
+     // 'device_name' => 'required',
     ]);
     if ($validator->fails()) {
       return response()->json(['status' => false, 'message' => $validator->errors()->first()], 400);
@@ -176,7 +177,8 @@ class UserController extends Controller
     $accessToken = $user->createToken('android')->plainTextToken;
     $date = [
       'status' => true,
-      'user' => $this->userData($user, $accessToken)
+      'message' => 'تم تغير الباسورد بنجاح',
+      'data' => $this->userData($user, $accessToken)
     ];
     return response()->json($date);
   }
