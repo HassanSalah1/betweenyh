@@ -87,7 +87,7 @@
             "slug": [
                 "dashboard"
             ],
-            "can": "access_pages"
+            "can": "access_pages_hassan"
         }
     ]
 }

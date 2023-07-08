@@ -61,11 +61,11 @@ class RolesPermissionsSeeder extends Seeder
             ['name' => 'edit_categories'],
             ['name' => 'delete_categories'],
 
-            ['name' => 'access_pages'],
-            ['name' => 'create_pages'],
-            ['name' => 'show_pages'],
-            ['name' => 'edit_pages'],
-            ['name' => 'delete_pages'],
+            ['name' => 'access_pages_hassan'],
+            ['name' => 'create_pages_hassan'],
+            ['name' => 'show_pages_hassan'],
+            ['name' => 'edit_pages_hassan'],
+            ['name' => 'delete_pages_hassan'],
 
         ];
 
