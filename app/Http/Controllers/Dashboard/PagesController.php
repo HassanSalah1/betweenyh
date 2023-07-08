@@ -16,7 +16,7 @@ class PagesController extends Controller
 {
     public function index(): View
     {
-        $this->authorize('access_pages');
+        $this->authorize('access_dashboard');
         $breadcrumbs = [
             ['link' => route('dashboard'), 'name' => __('Dashboard')], ['name' => __("Pages")]
         ];
@@ -28,7 +28,7 @@ class PagesController extends Controller
      */
     public function create(): View
     {
-        $this->authorize('create_pages');
+        $this->authorize('access_dashboard');
         $breadcrumbs = [
             ['link' => route('dashboard'), 'name' => __('Dashboard')], ['link' => route('pages.index'), 'name' => __("Pages")], ['name' => __("Create Page")]
         ];
@@ -41,7 +41,7 @@ class PagesController extends Controller
      */
     public function store(PageStoreRequest $request): RedirectResponse
     {
-        $this->authorize('create_pages');
+        $this->authorize('access_dashboard');
 
          Page::create($request->validated());
 
@@ -54,7 +54,7 @@ class PagesController extends Controller
      */
     public function show(Page $user): View
     {
-        $this->authorize('show_pages');
+        $this->authorize(access_dashboard);
         $breadcrumbs = [
             ['link' => route('dashboard'), 'name' => __('Dashboard')], ['link' => route('pages.index'), 'name' =>  __("Pages")], ['name' => __("Show Page")]
         ];
@@ -66,7 +66,7 @@ class PagesController extends Controller
      */
     public function edit(Page $page): View
     {
-        $this->authorize('edit_pages');
+        $this->authorize(access_dashboard);
         $breadcrumbs = [
             ['link' => route('dashboard'), 'name' => __('Dashboard')], ['link' => route('pages.index'), 'name' =>  __("Pages")], ['name' => __("Edit Page")]
         ];
@@ -79,7 +79,7 @@ class PagesController extends Controller
      */
     public function update(PageUpdateRequest $request, Page $page): RedirectResponse
     {
-        $this->authorize('edit_pages');
+        $this->authorize(access_dashboard);
         $data = $request->all();
 
         $page->update($data);
@@ -92,7 +92,7 @@ class PagesController extends Controller
      */
     public function destroy(Page $page): RedirectResponse
     {
-        $this->authorize('delete_pages');
+        $this->authorize('access_dashboard');
         $page->delete();
         // toastr()->warning('Page has been updated successfuly', 'Warning');
         return redirect()->back();
