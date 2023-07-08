@@ -39,7 +39,9 @@
 @endsection
 
 @section('vendor-script')
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{{--  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>--}}
+<script src="https://unpkg.com/axios@1.4.0/dist/axios.min.js"></script>
+
   {{-- datatable files --}}
   <script src="{{ asset(mix('vendors/js/tables/datatable/jquery.dataTables.min.js')) }}"></script>
   <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.bootstrap5.min.js')) }}"></script>
