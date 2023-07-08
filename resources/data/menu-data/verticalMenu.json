@@ -63,17 +63,6 @@
             ]
         },
         {
-            "name": "Users",
-            "icon": "circle",
-            "url": "admin/users",
-            "slug": [
-                "users.index",
-                "users.edit",
-                "users.permissions.edit"
-            ],
-            "can": "access_users"
-        },
-        {
             "name": "Socials",
             "icon": "home",
             "url": "admin/socials",
