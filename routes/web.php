@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 
-Route::get('/', [Controllers\HomeController::class, 'welcome'])->name('welcome');
+//Route::get('/', [Controllers\HomeController::class, 'welcome'])->name('welcome');
 Route::get('lang/{lang}', [Controllers\HomeController::class, 'setLocale'])->name('lang');
 
 Route::middleware('locale')->group(function () {
@@ -22,6 +22,12 @@ Route::get('/dashboard', function () {
     return redirect('/admin/dashboard');
     //return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/', function () {
+    return redirect('/admin/dashboard');
+    //return view('dashboard');
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

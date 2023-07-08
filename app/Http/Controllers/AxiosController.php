@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Page;
 use App\Models\Social;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -66,6 +67,12 @@ class AxiosController extends Controller
                 'created_at_from' => $order->created_at->diffForHumans(),
             ];
         });
+
+    }
+
+    public function pages(): Collection
+    {
+        return Page::all();
 
     }
 

@@ -7,14 +7,8 @@
     <ul class="nav navbar-nav flex-row">
       <li class="nav-item me-auto">
         <a class="navbar-brand" href="{{ url('/') }}">
-          <span class="brand-logo">
-            <svg width="30" height="30" viewBox="0 0 34 43" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M0.600098 5.00008V37.9001C0.600098 41.4001 4.50015 43.4001 7.40015 41.5001L31.5001 25.2001C34.0001 23.5001 34.0001 19.8001 31.5001 18.0001L7.40015 1.40008C4.50015 -0.599927 0.600098 1.50008 0.600098 5.00008Z"
-                fill="#ffffff" />
-            </svg>
-          </span>
-          <h2 class="brand-text mb-0">{{ env('APP_NAME') }}</h2>
+          <img src="{{asset('/images/logo.svg')}}"  width='170px'>
+
         </a>
       </li>
       <li class="nav-item nav-toggle">

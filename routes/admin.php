@@ -15,4 +15,6 @@ Route::prefix('admin')->middleware(['theme', 'auth'])->group(function () {
     // Route::get('users/permissions/{user}/edit', [Dashboard\UserController::class, 'editPermission'])->name('users.permissions.edit');
     // Route::post('users/permissions/{user}/update', [Dashboard\UserController::class, 'updatePermission'])->name('users.permissions.update');
 
+    Route::resource('pages', Dashboard\PagesController::class);
+
 });

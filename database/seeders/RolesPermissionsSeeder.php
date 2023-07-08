@@ -60,6 +60,13 @@ class RolesPermissionsSeeder extends Seeder
             ['name' => 'show_categories'],
             ['name' => 'edit_categories'],
             ['name' => 'delete_categories'],
+
+            ['name' => 'access_pages'],
+            ['name' => 'create_pages'],
+            ['name' => 'show_pages'],
+            ['name' => 'edit_pages'],
+            ['name' => 'delete_pages'],
+
         ];
 
         foreach ($permissions as $permission) {

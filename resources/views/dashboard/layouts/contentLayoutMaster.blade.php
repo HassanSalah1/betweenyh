@@ -33,6 +33,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
   {{-- Include core + vendor Styles --}}
+  <style>
+    .main-menu .navbar-header{
+      height: 11.45rem !important;
+      background: white;
+    }
+    .main-menu .navbar-header .navbar-brand{
+      margin-top: 0.35rem;
+    }
+
+  </style>
   @include('dashboard.panels.styles')
 </head>
 <!-- END: Head-->

@@ -10,4 +10,6 @@ Route::prefix('axios')->group(function () {
     Route::get('permissions', [Controllers\AxiosController::class, 'permissions']);
     Route::get('socials', [Controllers\AxiosController::class, 'socials']);
     Route::get('orders', [Controllers\AxiosController::class, 'orders']);
+    Route::get('pages', [Controllers\AxiosController::class, 'pages']);
+
 });
