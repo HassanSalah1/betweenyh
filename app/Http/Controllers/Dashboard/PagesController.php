@@ -5,11 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\PageStoreRequest;
 use App\Http\Requests\Dashboard\PageUpdateRequest;
-use App\Models\Category;
 use App\Models\Page;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class PagesController extends Controller
@@ -54,7 +51,7 @@ class PagesController extends Controller
      */
     public function show(Page $user): View
     {
-        $this->authorize(access_dashboard);
+        $this->authorize('access_dashboard');
         $breadcrumbs = [
             ['link' => route('dashboard'), 'name' => __('Dashboard')], ['link' => route('pages.index'), 'name' =>  __("Pages")], ['name' => __("Show Page")]
         ];
@@ -66,7 +63,7 @@ class PagesController extends Controller
      */
     public function edit(Page $page): View
     {
-        $this->authorize(access_dashboard);
+        $this->authorize('access_dashboard');
         $breadcrumbs = [
             ['link' => route('dashboard'), 'name' => __('Dashboard')], ['link' => route('pages.index'), 'name' =>  __("Pages")], ['name' => __("Edit Page")]
         ];
@@ -79,7 +76,7 @@ class PagesController extends Controller
      */
     public function update(PageUpdateRequest $request, Page $page): RedirectResponse
     {
-        $this->authorize(access_dashboard);
+        $this->authorize('access_dashboard');
         $data = $request->all();
 
         $page->update($data);

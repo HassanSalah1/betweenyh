@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
 use function App\Http\Controllers\Api\V1\str_contains;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerificationCodeMail;
 
 
 class UserController extends Controller
@@ -117,28 +119,39 @@ class UserController extends Controller
             'data' => null
         ]);
     }
-  public function forgetPassword(Request $request)
-  {
-    $validator = Validator::make($request->all(), [
-      'email' => ['required', 'string', 'email', 'max:191'],
-    ]);
-    if ($validator->fails()) {
-      return response()->json(['status' => false, 'message' => $validator->errors()->first()], 400);
-    }
+    public function forgetPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => ['required', 'string', 'email', 'max:191'],
+        ]);
 
-    $user = User::where('email', $request->email)->first();
-    if (!$user) {
-      return response()->json(['status' => false, 'message' => 'البريد الالكتروني غير موجود'], 400);
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'message' => $validator->errors()->first()], 400);
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return response()->json(['status' => false, 'message' => 'البريد الالكتروني غير موجود'], 400);
+        }
+
+        $code = rand(100000, 999999);
+
+        Mail::to($user->email)->send(new VerificationCodeMail($code, $user->name));
+        try {
+            // Send the verification code email to the user
+
+            $data = [
+                'status' => true,
+                'message' => 'تم ارسال الكود الى البريد الالكتروني',
+                'data' => $code
+            ];
+
+            return response()->json($data);
+        } catch (\Exception $e) {
+            return response()->json(['status' => false, 'message' => $e], 500);
+        }
     }
-    $code = rand(100000,999999);
-//    $code = 123456;
-    $date = [
-      'status' => true,
-      'message' => 'تم ارسال الكود الي البريدالالكتروني ',
-      'data' => $code
-    ];
-    return response()->json($date);
-  }
   public function checkCode(Request $request)
   {
     $validator = Validator::make($request->all(), [
