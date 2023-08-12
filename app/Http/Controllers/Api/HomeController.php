@@ -34,7 +34,7 @@ class HomeController extends Controller
                   'app_version' => 1,
                   'allow_notification' => true,
                   'about' => optional(Page::where('slug', 'terms')->first())->body,
-                  'terms' => optional(Page::where('slug', 'terms')->first())->body,
+                  'terms' => optional(Page::where('slug', 'about')->first())->body,
               ]
             ];
         return response()->json($date);
