@@ -118,7 +118,7 @@
                 <ul class="grid grid-cols-1 place-items-left px-4 gap-x-2 gap-y-4 lg:gap-10">
                     @foreach($user->services as $item)
                         <li>
-                            <a href="https://{{$item->url}}"><span class="text-gray-700">{{$item->title}}</span></a>
+                            <a href="{{$item->url}}"><span class="text-gray-700">{{$item->title}}</span></a>
                             <p>
                                 <small>{{$item->description}}</small>
                             </p>
