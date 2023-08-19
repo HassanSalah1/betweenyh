@@ -95,10 +95,22 @@
                                 </li>
                             @else
                                 <li class="flex">
-                                    <a href="http://{{ $item->url }}">
-                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($item->social->image) }}" alt="{{ $item->social->name }}" class="w-10 mx-auto lg:w-16 mb-2" />
-                                        <span class="text-gray-700">{{ $item->social->name }}</span>
-                                    </a>
+
+                                        @if (str_contains($item->url, 'http') || str_contains($item->url, 'https'))
+                                            <a href="{{ $item->url }}">
+                                                <img src="{{ \Illuminate\Support\Facades\Storage::url($item->social->image) }}" alt="{{ $item->social->name }}" class="w-10 mx-auto lg:w-16 mb-2" />
+                                                <span class="text-gray-700">{{ $item->social->name }}</span>
+                                            </a>
+                                         @else
+                                            <a href="https://{{ $item->url }}">
+                                                <img src="{{ \Illuminate\Support\Facades\Storage::url($item->social->image) }}" alt="{{ $item->social->name }}" class="w-10 mx-auto lg:w-16 mb-2" />
+                                                <span class="text-gray-700">{{ $item->social->name }}</span>
+                                            </a>
+                                        @endif
+{{--                                    <a href="http://{{ $item->url }}">--}}
+{{--                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($item->social->image) }}" alt="{{ $item->social->name }}" class="w-10 mx-auto lg:w-16 mb-2" />--}}
+{{--                                        <span class="text-gray-700">{{ $item->social->name }}</span>--}}
+{{--                                    </a>--}}
                                 </li>
                             @endif
                     @endforeach
