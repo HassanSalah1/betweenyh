@@ -134,16 +134,15 @@
                     @foreach($user->services as $item)
                         @if(preg_match($arabicRange, $item->title))
                             <li class='text-right'>
-                                <a href="{{$item->url}}"><span class="text-gray-700 font-medium-1">{{$item->title}}</span></a>
-                                <br>
-                                <span class='font-small-1'>
+                                <a href="{{$item->url}}"><span class="text-gray-700 text-2xl">{{$item->title}}</span></a>
+                                <p class='text-1xl'>
                                     <small>{{$item->description}}</small>
-                                </span>
+                                </p>
                             </li>
                         @else
                             <li>
-                                <a href="{{$item->url}}"><span class="text-gray-700">{{$item->title}}</span></a>
-                                <p>
+                                <a href="{{$item->url}}"><span class="text-gray-700 text-2xl">{{$item->title}}</span></a>
+                                <p class='text-1xl'>
                                     <small>{{$item->description}}</small>
                                 </p>
                             </li>
