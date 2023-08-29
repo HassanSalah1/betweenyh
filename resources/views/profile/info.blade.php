@@ -128,13 +128,27 @@
             </div>
             <div class="bg-white px-2 lg:px-10 py-6 rounded-b-2xl">
                 <ul class="grid grid-cols-1 place-items-left px-4 gap-x-2 gap-y-4 lg:gap-10">
+                    @php
+                        $arabicRange = '/[\x{0600}-\x{06FF}\x{0750}-\x{077F}\x{08A0}-\x{08FF}\x{FB50}-\x{FDFF}\x{FE70}-\x{FEFF}\x{10E60}-\x{10E7F}]/u';
+                    @endphp
                     @foreach($user->services as $item)
-                        <li>
-                            <a href="{{$item->url}}"><span class="text-gray-700">{{$item->title}}</span></a>
-                            <p>
-                                <small>{{$item->description}}</small>
-                            </p>
-                        </li>
+                        @if(preg_match($arabicRange, $item->title))
+                            <li class='text-right'>
+                                <a href="{{$item->url}}"><span class="text-gray-700">{{$item->title}}</span></a>
+                                <br>
+                                <span>
+                                    <small>{{$item->description}}</small>
+                                </span>
+                            </li>
+                        @else
+                            <li>
+                                <a href="{{$item->url}}"><span class="text-gray-700">{{$item->title}}</span></a>
+                                <p>
+                                    <small>{{$item->description}}</small>
+                                </p>
+                            </li>
+                        @endif
+
                     @endforeach
                 </ul>
             </div>
