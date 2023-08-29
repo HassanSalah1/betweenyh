@@ -141,8 +141,8 @@
                             </li>
                         @else
                             <li>
-                                <a href="{{$item->url}}"><span class="text-gray-700 text-2xl">{{$item->title}}</span></a>
-                                <p class='text-1xl'>
+                                <a href="{{$item->url}}"><span class="text-gray-700" style='font-size: 16px; font-weight: bold'>{{$item->title}}</span></a>
+                                <p style="font-size: 14px; font-weight: 200;">
                                     <small>{{$item->description}}</small>
                                 </p>
                             </li>
