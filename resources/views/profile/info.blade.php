@@ -131,6 +131,7 @@
                     @php
                         $arabicRange = '/[\x{0600}-\x{06FF}\x{0750}-\x{077F}\x{08A0}-\x{08FF}\x{FB50}-\x{FDFF}\x{FE70}-\x{FEFF}\x{10E60}-\x{10E7F}]/u';
                     @endphp
+{{--                    @foreach($user->services->where('status', 1)->sortBy('sort') as $item)--}}
                     @foreach($user->services as $item)
                         @if(preg_match($arabicRange, $item->title))
                             <li class='text-right'>

@@ -31,6 +31,7 @@ class ServicesController extends Controller
         return[
          'id' => $map->id,
          'title' => $map->title,
+         'status' => $map->status,
          'description' => $map->description,
          'url' => $map->url,
         ];
